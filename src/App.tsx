@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Let's start Lupe - this is landing page
         </a>
       </header>
     </div>
