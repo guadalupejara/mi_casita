@@ -1,22 +1,42 @@
 import React from 'react';
 import './App.css';
 import Home from './Pages/Home'
-import { BrowserRouter, Routes, Route } from 'react-router';
+import Login from './Pages/Login';
+import Navbar from './components/Navbar';
+import Dashboard from './Pages/Dashboard';
+import Register from './Pages/Register'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
+function AppContent(){
+  const location = useLocation();
+  const publicRoutes = ['/', '/login', '/register'];
 
-function App() {
-  return (
-    <BrowserRouter>
-    <div className="App">
-       <div>
+  const isPublicRoute = publicRoutes.includes(location.pathname.toLowerCase());
+
+  return(
+    <React.Fragment>
+      <div>
+      {isPublicRoute && <Navbar />}
+
       <Routes>
         <Route>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-
       </Routes>
       </div>
-    </div>
-   </BrowserRouter>
+
+    </React.Fragment>
+  )
+}
+
+
+function App() {
+  return (
+   <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
