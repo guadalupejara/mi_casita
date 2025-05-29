@@ -1,11 +1,20 @@
 import React from 'react'
-export default function Home(){
+import NavButton from '../components/NavButton'
+function Home(){
 
 return(
-<main>
+   
+    <React.Fragment>
+<main className='min-h-screen'>
     <div>
         <h1>I am home page</h1>
     </div>
-</main>
+    <div>
+    <NavButton label="Go to Login" to="/login" />
+    <NavButton label="Go to Register" to="/register" />
+    </div>
+</main></React.Fragment>
 )
 }
+
+export default Home
