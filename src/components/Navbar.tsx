@@ -22,7 +22,7 @@ function Navbar(){
         <Link to="/"   style={{
     display: 'flex',
     alignItems: 'center'
-  }} className="hover:text-gray-500">Home</Link>
+  }} className="hover:text-zinc-500">Home</Link>
         <NavButton label="Login" to="/login" />
       </div>
     </div>
