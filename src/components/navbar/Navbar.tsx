@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router';
-import NavButton from './NavButton';
+import NavButton from '../navbutton/NavButton';
 
 function Navbar(){
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Home from './Pages/Home'
-import Login from './Pages/Login';
-import Navbar from './components/Navbar';
-import Dashboard from './Pages/Dashboard';
-import Register from './Pages/Register'
+import Home from './Pages/home/Home'
+import Login from './Pages/login/Login';
+import Navbar from './components/navbar/Navbar';
+import Dashboard from './Pages/dashboard/Dashboard';
+import Register from './Pages/register/Register'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
 function AppContent(){
   const location = useLocation();
