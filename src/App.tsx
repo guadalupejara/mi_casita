@@ -6,7 +6,9 @@ import Navbar from './components/navbar/Navbar';
 import Dashboard from './Pages/dashboard/Dashboard';
 import Register from './Pages/register/Register'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
-function AppContent(){
+import { people, person } from './Data/data';
+
+function AppContent({ people }: { people: person[] }){
   const location = useLocation();
   const publicRoutes = ['/', '/login', '/register'];
 
@@ -19,7 +21,7 @@ function AppContent(){
 
       <Routes>
         <Route>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home people={people} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -35,7 +37,7 @@ function AppContent(){
 function App() {
   return (
    <BrowserRouter>
-      <AppContent />
+      <AppContent people={people}/>
     </BrowserRouter>
   );
 }
