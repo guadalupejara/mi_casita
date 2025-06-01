@@ -1,16 +1,16 @@
 import React from 'react'
 import NavButton from '../../components/navbutton/NavButton'
-import { person } from '../../Data/data'
-import casita from '../../../public/casita.jpg'
+import { person } from '../../Data/userData'
+import { feature } from '../../Data/featureData'
 
-function Home({people}:{people:person[]}){
+function Home({people, features}:{people:person[], features:feature[]}){
 console.log("You made it home")
 
 return(
    
     <React.Fragment>
 <main className='min-h-screen m-4'>
-    <div
+    <div id='banner'
      className="bg-cover bg-center p-10 h-96 flex flex-col items-center justify-center text-center text-white"
      style={{ backgroundImage: `url(/casita.jpg)` }}
     >
@@ -28,6 +28,9 @@ return(
     <NavButton className='m-1' label="Go to Register" to="/register" />
     </div> 
     </div>
+    </div>
+    <div id='features' className='m-4'>
+    <h1 className='text-2xl mb-3'><strong>Features</strong></h1>
     </div>
 </main></React.Fragment>
 )
