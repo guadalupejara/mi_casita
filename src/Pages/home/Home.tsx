@@ -2,6 +2,7 @@ import React from 'react'
 import NavButton from '../../components/navbutton/NavButton'
 import { person } from '../../Data/userData'
 import { feature } from '../../Data/featureData'
+import FeatureCard from './featureCard'
 
 function Home({people, features}:{people:person[], features:feature[]}){
 console.log("You made it home")
@@ -30,7 +31,19 @@ return(
     </div>
     </div>
     <div id='features' className='m-4'>
+        <div>
     <h1 className='text-2xl mb-3'><strong>Features</strong></h1>
+    </div>
+    <div className='flex flex-row flex-wrap justify-center gap-4'>
+        {features.map(
+            (feature, index) => (
+                <FeatureCard
+                key= {index}
+                features = {feature}
+                />
+            )
+        )}
+    </div>
     </div>
 </main></React.Fragment>
 )
