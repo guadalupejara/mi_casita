@@ -2,7 +2,6 @@ import React from "react";
 import { feature } from '../../Data/featureData'
 
 function featureCard({features}:{features:feature}){
-//image , title, description
     return(
         <React.Fragment>
              <div className="border rounded-lg p-4 mb-4 shadow-md max-w-md ">
