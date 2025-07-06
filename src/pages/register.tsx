@@ -18,8 +18,6 @@ function Register() {
         />
         <div className="absolute inset-0 bg-black opacity-50" />
       </div>
-
-      {/* Content */}
       <div className="flex items-center justify-center min-h-screen px-4">
         <div className="w-full max-w-md sm:max-w-lg md:max-w-xl">
           <TransparentCard>
@@ -39,5 +37,4 @@ function Register() {
     </main>
   );
 }
-
 export default Register;
