@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import { Formik, Form, Field } from 'formik';
-import { UserInput } from "../../Types/types";
+import { RegisterUserInput } from "../../Types/types";
 import {Eye, EyeOff} from "lucide-react";
-import formSchema from "../../Schema/validationSchema";
+import {registerFormSchema} from "../../Schema/validationSchema";
 import { ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast'
 import { toastSuccessOptions } from "../../styles/toastStyle";
 
-const initialValues: UserInput = {
+const initialValues: RegisterUserInput = {
   firstName: '',
   lastName: '',
   email: '',
@@ -19,14 +19,14 @@ function RegisterForm (){
 const [showPassword, setShowPassword] = useState(false);
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-const onSubmit = (values: UserInput) => {
+const onSubmit = (values: RegisterUserInput) => {
     console.log(values)
      toast.success('Registered successfully!', toastSuccessOptions)
 }
 
     return(
         <React.Fragment>
-            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={(values) => {onSubmit(values)}}>
+            <Formik initialValues={initialValues} validationSchema={registerFormSchema} onSubmit={(values) => {onSubmit(values)}}>
      <Form className="text-left">
        <div className="mb-3 flex items-center space-x-3">
   <label className="w-24" htmlFor="firstName">First Name</label>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import TransparentCard from '../components/register/transparentCard';
+import TransparentCard from '../components/common/transparentCard';
 import RegisterForm from '../components/register/registerForm';
 
 function Register() {
@@ -26,7 +26,7 @@ function Register() {
             <p className="text-gray-700 text-sm sm:text-base text-center mb-6">
               Already a user?{' '}
               <Link href="/login" className="text-orange-900 hover:underline ml-1">
-                Sign in
+                Log in
               </Link>
             </p>
             <RegisterForm />

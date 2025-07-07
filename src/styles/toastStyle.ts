@@ -8,7 +8,7 @@ export const toastSuccessOptions = {
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // shadow-md
   },
   iconTheme: {
-    primary: '#65a30d', // lime-500
+    primary: '#1a2e05', // lime-500
     secondary: 'white',
   },
 }

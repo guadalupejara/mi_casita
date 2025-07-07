@@ -1,5 +1,5 @@
 // types/user.ts
-export interface UserInput {
+export interface RegisterUserInput {
   firstName: string;
   lastName: string;
   email: string;
@@ -7,7 +7,12 @@ export interface UserInput {
   confirmPassword: string;
 }
 
-export interface User extends UserInput {
+export interface LogInUserInput {
+  email: string;
+  password: string;
+}
+
+export interface User extends RegisterUserInput {
   id: number;
   createdAt?: string; 
   updatedAt?: string;
