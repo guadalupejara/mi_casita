@@ -1,3 +1,7 @@
-
 @import "tailwindcss";
+@tailwind utilities;
 
+/* globals.css */
+.toast-success {
+  @apply bg-lime-950 text-white border border-lime-500 rounded-md shadow-md;
+}

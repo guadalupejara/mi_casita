@@ -5,7 +5,6 @@ import FeatureCard from '../components/home/featureCard'
 
 function Home(){
 console.log("You made it home")
-
 return(
    
     <React.Fragment>
@@ -51,5 +50,4 @@ return(
 </main></React.Fragment>
 )
 }
-
 export default Home
