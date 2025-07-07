@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast'
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  // Define routes where you want to show the Navbar
   const publicRoutes = ['/', '/login', '/register'];
   const showNavbar = publicRoutes.includes(router.pathname.toLowerCase());
 
