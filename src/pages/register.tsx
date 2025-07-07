@@ -7,7 +7,6 @@ import RegisterForm from '../components/register/registerForm';
 function Register() {
   return (
     <main className="relative min-h-screen w-full overflow-hidden">
-      {/* Background image using next/image */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/door2.jpg"

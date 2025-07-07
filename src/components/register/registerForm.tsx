@@ -4,7 +4,8 @@ import { UserInput } from "../../Types/types";
 import {Eye, EyeOff} from "lucide-react";
 import formSchema from "../../Schema/validationSchema";
 import { ErrorMessage } from 'formik';
-
+import { toast } from 'react-hot-toast'
+import { toastSuccessOptions } from "../../styles/toastStyle";
 
 const initialValues: UserInput = {
   firstName: '',
@@ -20,6 +21,7 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 const onSubmit = (values: UserInput) => {
     console.log(values)
+     toast.success('Registered successfully!', toastSuccessOptions)
 }
 
     return(
