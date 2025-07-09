@@ -6,6 +6,10 @@ import {registerFormSchema} from "../../Schema/validationSchema";
 import { ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast'
 import { toastSuccessOptions } from "../../styles/toastStyle";
+import { useRouter } from 'next/navigation';
+import { registerUser } from '../../Services/authServices';
+import { ClockLoader } from "react-spinners";
+
 
 const initialValues: RegisterUserInput = {
   firstName: '',
@@ -18,12 +22,33 @@ const initialValues: RegisterUserInput = {
 function RegisterForm (){
 const [showPassword, setShowPassword] = useState(false);
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [isSubmitting, setIsSubmitting] = useState(false);
+const router = useRouter();
 
-const onSubmit = (values: RegisterUserInput) => {
-    console.log(values)
-     toast.success('Registered successfully!', toastSuccessOptions)
-}
+const onSubmit = async (values: RegisterUserInput) => {
+  if (isSubmitting) return;
+  setIsSubmitting(true);
 
+  try {
+    await registerUser({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+    });
+
+    toast.success('Registered successfully!', toastSuccessOptions);
+    router.push('/dashboard');
+  } catch (error: any) {
+    const message =
+      error.code === 'auth/email-already-in-use'
+        ? 'Email already in use.'
+        : error.message;
+    toast.error(message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
     return(
         <React.Fragment>
             <Formik initialValues={initialValues} validationSchema={registerFormSchema} onSubmit={(values) => {onSubmit(values)}}>
@@ -136,7 +161,22 @@ const onSubmit = (values: RegisterUserInput) => {
   className="text-red-800 text-sm mt-1"
 />
 </div>
-        <button className="bg-zinc-950 text-white text-1xl rounded mx-auto block px-4 py-2 hover:bg-zinc-500 transition-colors duration-200 " type="submit">Register</button>
+<button
+  type="submit"
+  disabled={isSubmitting}
+  className={`bg-zinc-950 text-white text-1xl rounded mx-auto block px-4 py-2 transition-colors duration-200 ${
+    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-zinc-500'
+  }`}
+>
+  {isSubmitting ? (
+    <div className="flex items-center justify-center space-x-2">
+      <ClockLoader size={20} color="#ffffff" />
+      <span>Registering...</span>
+    </div>
+  ) : (
+    'Register'
+  )}
+</button>
       </Form>
             </Formik>
         </React.Fragment>

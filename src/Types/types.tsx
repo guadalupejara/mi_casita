@@ -17,3 +17,10 @@ export interface User extends RegisterUserInput {
   createdAt?: string; 
   updatedAt?: string;
 }
+
+export interface RegisterUserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
