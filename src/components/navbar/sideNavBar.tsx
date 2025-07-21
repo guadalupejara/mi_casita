@@ -1,14 +1,15 @@
 'use client';
 
 import React from 'react';
-import { Home, LogOut } from 'lucide-react';
+import { Home, LogOut, Cog } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { toast } from 'react-hot-toast'
 import { toastSuccessOptions } from "../../styles/toastStyle";
+import { SideNavProps } from '../../Types/types';
 
-const SideNav: React.FC = () => {
+const SideNav: React.FC<SideNavProps> = ({ setView }) => {
   const router = useRouter();
 
 const handleLogout = async () => {
@@ -28,13 +29,26 @@ const handleLogout = async () => {
       {/* Home Icon */}
       <div className="group relative">
         <button
-          onClick={() => router.push('/dashboard')}
+          onClick={() => setView('home')}
           className="text-white hover:text-zinc-400 transition-colors"
         >
           <Home size={24} />
         </button>
         <span className="absolute -right-28 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-2 py-1 rounded shadow">
           Home
+        </span>
+      </div>
+
+        {/* Settings Icon */}
+      <div className="group relative">
+        <button
+          onClick={() => setView('settings')}
+          className="text-white hover:text-zinc-400 transition-colors"
+        >
+          <Cog size={24} />
+        </button>
+        <span className="absolute -right-28 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-2 py-1 rounded shadow">
+          Settings
         </span>
       </div>
 

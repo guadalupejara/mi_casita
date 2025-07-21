@@ -25,6 +25,13 @@ export interface RegisterUserData {
   password: string;
 }
 
+export interface SettingsFormValues extends RegisterUserInput {
+  phoneNumber?: string;
+  currentPassword: string;
+  newPassword?: string;
+  confirmNewPassword?: string;
+}
+
 export interface LoginUserData {
   email: string;
   password: string;
@@ -34,4 +41,8 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface SideNavProps {
+  setView: React.Dispatch<React.SetStateAction<'home' | 'settings'>>;
 }

@@ -3,10 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import SideNav from '../components/navbar/sideNavBar'
 import { UserProfile } from '../Types/types';
+import DashHome from '../components/dashBoardViews/dashHome'
+import Settings from '../components/dashBoardViews/settings'
+import DarkTransparentCard from '../components/common/darkTransparentCard';
 
 const DashboardPage = ({ userProfile }: { userProfile: UserProfile }) => {
   // In the future this URL will come from Firebase
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
+  const [view, setView] = useState<'home' | 'settings'>('home');
 
   useEffect(() => {
     // Simulated fetch — replace with your actual logic (e.g., Firebase call)
@@ -18,21 +22,30 @@ const DashboardPage = ({ userProfile }: { userProfile: UserProfile }) => {
     fetchBackgroundImage();
   }, []);
 
+
+const renderView = () => {
+    switch (view) {
+      case 'home':
+        return <DashHome userProfile={userProfile} />;
+      case 'settings':
+        return <Settings />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div
-      className="w-screen h-screen bg-cover bg-center flex items-center justify-center transition-all duration-500"
+     <div
+      className="w-screen min-h-screen bg-cover bg-center flex items-center justify-center transition-all duration-500"
       style={{
         backgroundImage: backgroundImageUrl ? `url(${backgroundImageUrl})` : undefined,
-        backgroundColor: backgroundImageUrl ? undefined : '#111827', // Fallback background
+        backgroundColor: backgroundImageUrl ? undefined : '#111827',
       }}
     >
-      <div className="w-[90%] max-w-6xl h-[80%] bg-black/60 bg-opacity-60 rounded-3xl shadow-2xl backdrop-blur-md p-8 text-white overflow-hidden">
-        <h1 className="text-2xl font-bold mb-4">Hello {userProfile?.firstName || 'Friend'} ! Welcome to your Casita.</h1>
-        <p className="text-gray-300">Your smart home dashboard.</p>
+      <div className='w-[90%] max-w-6xl h-[80%]'>
+      <DarkTransparentCard>{renderView()}</DarkTransparentCard>
       </div>
-      <div>
-         <SideNav/>
-      </div>
+      <SideNav setView={setView} />
     </div>
   );
 };
