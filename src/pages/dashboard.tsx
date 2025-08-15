@@ -7,7 +7,12 @@ import DashHome from '../components/dashBoardViews/dashHome'
 import Settings from '../components/dashBoardViews/settings'
 import DarkTransparentCard from '../components/common/darkTransparentCard';
 
-const DashboardPage = ({ userProfile }: { userProfile: UserProfile }) => {
+interface DashboardPageProps {
+  userProfile: UserProfile;
+  reloadUserProfile: () => Promise<void>;
+}
+
+const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile }) => {
   // In the future this URL will come from Firebase
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
   const [view, setView] = useState<'home' | 'settings'>('home');
@@ -28,7 +33,7 @@ const renderView = () => {
       case 'home':
         return <DashHome userProfile={userProfile} />;
       case 'settings':
-        return <Settings />;
+        return <Settings userProfile={userProfile} reloadUserProfile={reloadUserProfile}/>;
       default:
         return null;
     }

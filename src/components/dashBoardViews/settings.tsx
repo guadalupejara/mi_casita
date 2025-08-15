@@ -1,14 +1,24 @@
-import React from 'react'
-import { SettingsFormValues } from '../../Types/types';
+import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { settingsValidationSchema } from '../../Schema/validationSchema';
+import { useRouter } from 'next/navigation';
+import { SettingsFormValues, UserProfile } from '../../Types/types';
 import SettingsForm from './settingsForm';
-import { toastSuccessOptions } from '../../styles/toastStyle'; 
-import { toast } from 'react-hot-toast'
+import { settingsValidationSchema } from '../../Schema/validationSchema';
+import { updateUserProfile, deleteCurrentUser } from '../../Services/authServices';
+import { sendEmailVerification } from 'firebase/auth';
+import { auth } from '../../lib/firebase';
+import { toast } from 'react-hot-toast';
+import { toastSuccessOptions } from '../../styles/toastStyle';
 
-const Settings: React.FC = () => {
+interface Props {
+  userProfile: UserProfile;
+  reloadUserProfile: () => Promise<void>;
+}
 
-  const initialValues: SettingsFormValues = {
+const Settings: React.FC<Props> = ({ userProfile, reloadUserProfile }) => {
+  const router = useRouter();
+console.log(userProfile, reloadUserProfile)
+  const [initialValues, setInitialValues] = useState<SettingsFormValues>({
     firstName: '',
     lastName: '',
     email: '',
@@ -18,27 +28,69 @@ const Settings: React.FC = () => {
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: '',
+  });
+
+  useEffect(() => {
+    if (userProfile) {
+      setInitialValues({
+        firstName: userProfile.firstName || '',
+        lastName: userProfile.lastName || '',
+        email: userProfile.email || '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: userProfile.phoneNumber || '',
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
+        originalEmail: userProfile.email || '',
+      });
+    }
+  }, [userProfile]);
+
+  const handleDeactivate = async () => {
+    const password = prompt('Please enter your password to confirm account deletion:');
+    if (!password) return;
+
+    try {
+      await deleteCurrentUser(password);
+      toast.success('Account successfully deactivated.', toastSuccessOptions);
+      router.push('/login');
+    } catch (error: any) {
+      console.error('Deactivation failed:', error);
+      toast.error(error.message || 'Failed to deactivate account.');
+    }
   };
 
-  const SettingsContainer = () => {
-    const handleSubmit = (values: SettingsFormValues) => {
-      console.log('Form Submitted:', values);
-      toast.success('Updated successfully!', toastSuccessOptions);
-      // future: make API call
-    };
+  const handleSubmit = async (values: SettingsFormValues) => {
+    try {
+      await updateUserProfile(values);
 
-    return (
-      <Formik
-        initialValues={initialValues}
-        validationSchema={settingsValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {(formik) => <SettingsForm formik={formik} />}
-      </Formik>
-    )
-  }
+      if (values.email !== values.originalEmail) {
+        const user = auth.currentUser;
+        if (user) {
+          await sendEmailVerification(user);
+          toast.success('Verification email sent! Please check your inbox.', toastSuccessOptions);
+        }
+      } else {
+        toast.success('Updated successfully!', toastSuccessOptions);
+        await reloadUserProfile();
+      }
+    } catch (error: any) {
+      console.error('Update failed:', error);
+      toast.error(error.message || 'Failed to update profile.');
+    }
+  };
 
-  return <SettingsContainer />;
-}
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={settingsValidationSchema}
+      onSubmit={handleSubmit}
+      enableReinitialize
+    >
+      {(formik) => <SettingsForm formik={formik} onDeactivate={handleDeactivate} />}
+    </Formik>
+  );
+};
 
 export default Settings;

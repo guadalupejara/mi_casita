@@ -25,22 +25,32 @@ export const settingsValidationSchema = yup.object({
 
   currentPassword: yup.string(),
 
-  newPassword: yup.string().when('currentPassword', {
-    is: (val: string) => val && val.length > 0,
-    then: (schema) =>
-      schema
-        .required('New password is required')
-        .min(8, 'Minimum 8 characters'),
-    otherwise: (schema) => schema.notRequired(),
-  }),
+  newPassword: yup
+    .string()
+    .min(8, 'Minimum 8 characters')
+    .notRequired(),
 
-  confirmNewPassword: yup.string().when('newPassword', {
-    is: (val: string) => val && val.length > 0,
-    then: (schema) =>
-      schema
-        .required('Please confirm your new password')
-        .oneOf([yup.ref('newPassword')], 'Passwords must match'),
-    otherwise: (schema) => schema.notRequired(),
-  }),
-});
+  confirmNewPassword: yup
+    .string()
+    .oneOf([yup.ref('newPassword')], 'Passwords must match')
+    .when('newPassword', {
+      is: (val: string) => val && val.length > 0,
+      then: (schema) => schema.required('Please confirm your new password'),
+    }),
 
+  // 👇 Add custom validation at the end
+}).test(
+  'require-current-password-if-changing',
+  'Current password is required to change email or password',
+  function (values) {
+    const { currentPassword, newPassword, email, originalEmail } = values as any;
+    const changingPassword = newPassword?.length > 0;
+    const changingEmail = email !== originalEmail;
+
+    if ((changingPassword || changingEmail) && !currentPassword) {
+      return this.createError({ path: 'currentPassword' });
+    }
+
+    return true;
+  }
+);

@@ -3,7 +3,7 @@ import { UserProfile } from '../../Types/types';
 import { useEffect } from 'react';
 
 const DashboardHome = ({ userProfile }: { userProfile: UserProfile }) => {
-    console.log(userProfile)
+    
     useEffect(() => {
     console.log('userProfile loaded:', userProfile);
   }, [userProfile]);
