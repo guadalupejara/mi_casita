@@ -1,50 +1,25 @@
 <<<<<<< HEAD
-# mi_casita
-=======
-# Getting Started with Create React App
+# Mi_Casita
+**`Full Stack Project`**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app was created as inspired from DAKboard for a customizable display used on tablets. The idea for this project was inspired for creating a centralized home organization system by including multi UI calander managment, sticky notes, reminders, lists, and messaging system. The goal is to also make it kid friendly by providing extra features like drawing board, emoji stickers, and sticky notes. 
 
-## Available Scripts
+![Mi Casita Landing Page](readMe_Images/casita1.png)
+![Mi Casita Landing Page Features Section](readMe_Images/casita2.png)
+![Mi Casita LogIn Page](readMe_Images/casita3.png)
+![Mi Casita Registration Page](readMe_Images/casita4.png)
+![Mi Casita Dashboard Page](readMe_Images/casita5.png)
+![Mi Casita Settings Page](readMe_Images/casita6.png)
+![Mi Casita Settings Page Modal](readMe_Images/casita7.png)
 
-In the project directory, you can run:
+- Developed and tested responsive webpages using Tailwind CSS and React for the frontend, with Next.js and Firebase for backend management.
 
-### `npm start`
+- Integrated third-party libraries such as Yup and Formik to enforce schema-based data validation, streamlining quality control and improving data accuracy.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Implemented user authentication and data handling with Firebase OAuth, including login/logout functionality, update user information and secure hard deletes of user data.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Built secure HTTP routes based on user roles and page requirements, ensuring seamless navigation between public and authenticated user pages.
 
-### `npm test`
+- Designed a dynamic settings form that pre-populates user information from the database, supports updates, and includes a modal for secure account deactivation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
->>>>>>> b86bf56 (Initialize project using Create React App)
