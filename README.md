@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Mi_Casita
 **`Full Stack Project`**
 
