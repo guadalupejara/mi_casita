@@ -18,9 +18,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserPr
   const [view, setView] = useState<'home' | 'settings'>('home');
 
   useEffect(() => {
-    // Simulated fetch — replace with your actual logic (e.g., Firebase call)
     const fetchBackgroundImage = async () => {
-      const simulatedURL = 'bird.jpg'//your-firebase-storage-url.com/sample-background.jpg''; // Replace with dynamic URL from backend
+      const simulatedURL = 'bird.jpg'// Replace with dynamic URL from backend
       setBackgroundImageUrl(simulatedURL);
     };
 

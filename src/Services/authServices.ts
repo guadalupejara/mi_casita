@@ -73,6 +73,7 @@ export const updateUserProfile = async (data: SettingsFormValues) => {
   }
 
   // Update Firestore document
+  // need to seperate the update of user password & other info
   const docRef = doc(db, 'users', user.uid);
   await updateDoc(docRef, {
     firstName: data.firstName,
