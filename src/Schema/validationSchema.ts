@@ -37,8 +37,6 @@ export const settingsValidationSchema = yup.object({
       is: (val: string) => val && val.length > 0,
       then: (schema) => schema.required('Please confirm your new password'),
     }),
-
-  // 👇 Add custom validation at the end
 }).test(
   'require-current-password-if-changing',
   'Current password is required to change email or password',
