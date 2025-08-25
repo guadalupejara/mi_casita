@@ -37,6 +37,28 @@ function StickyNotesBoard() {
     return acc;
   }, {} as Record<number, React.RefObject<HTMLDivElement>>);
 
+
+  const NoteMapper = () => {
+  return notes.map(note => (
+    <Draggable
+      key={note.id}
+      nodeRef={noteRefs[note.id]}
+      defaultPosition={{ x: note.x, y: note.y }}
+      onStop={(e, data) => handleDragStop(note.id, data.x, data.y)}
+      cancel="textarea, .no-drag"
+    >
+      <div ref={noteRefs[note.id]} className="absolute">
+        <StickyNotes
+          id={note.id}
+          text={note.text}
+          onDelete={deleteNote}
+          onTextChange={updateNoteText}
+        />
+      </div>
+    </Draggable>
+  ));
+};
+
   return (
     <div
       className="bg-cover bg-center px-4 py-8 sm:py-10 md:py-12 lg:py-16 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh]"
@@ -45,26 +67,9 @@ function StickyNotesBoard() {
       <button onClick={addNote} className="bg-black text-white">
         Add Note
       </button>
-      <div className="relative w-full h-[80vh] border border-gray-200">
-        {notes.map(note => (
-          <Draggable
-            key={note.id}
-            nodeRef={noteRefs[note.id]}
-            defaultPosition={{ x: note.x, y: note.y }}
-            onStop={(e, data) => handleDragStop(note.id, data.x, data.y)}
-            cancel="textarea, .no-drag"
-          >
-            <div ref={noteRefs[note.id]} className="absolute">
-              <StickyNotes
-                id={note.id}
-                text={note.text}
-                onDelete={deleteNote}
-                onTextChange={updateNoteText}
-              />
-            </div>
-          </Draggable>
-        ))}
-      </div>
+      <div className="relative w-full h-[80vh]">
+  <NoteMapper />
+</div>
     </div>
   );
 }
