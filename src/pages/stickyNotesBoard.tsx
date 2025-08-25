@@ -62,7 +62,7 @@ function StickyNotesBoard() {
   return (
     <div
       className="bg-cover bg-center px-4 py-8 sm:py-10 md:py-12 lg:py-16 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh]"
-      style={{ backgroundImage: `url(/blackboard.jpg)` }}
+      style={{ backgroundImage: `url(/smileyFace.jpg)` }}
     >
       <button onClick={addNote} className="bg-black text-white">
         Add Note
