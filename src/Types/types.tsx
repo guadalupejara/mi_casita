@@ -49,3 +49,17 @@ export interface UserProfile {
 export interface SideNavProps {
   setView: React.Dispatch<React.SetStateAction<'home' | 'settings'>>;
 }
+
+export type Note = {
+  id: number;
+  text: string;
+  x: number;
+  y: number;
+};
+
+export default interface StickyNoteProps {
+  id: number;
+  text: string;
+  onTextChange: (id: number, newText: string) => void;
+  onDelete: (id: number) => void;
+}
