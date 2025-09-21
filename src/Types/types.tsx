@@ -55,11 +55,14 @@ export type Note = {
   text: string;
   x: number;
   y: number;
+  color: string;
 };
 
 export default interface StickyNoteProps {
   id: number;
   text: string;
-  onTextChange: (id: number, newText: string) => void;
+  color: string;
   onDelete: (id: number) => void;
+  onTextChange: (id: number, newText: string) => void;
+  onColorChange: (id: number, newColor: string) => void;
 }

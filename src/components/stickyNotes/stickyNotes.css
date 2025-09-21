@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Indie+Flower&display=swap');
 
-.stickyRoot {
+:root {
   --prim-color: #736a5a;
   --secondary-color: #625549;
   --bg-section: #9b968f;

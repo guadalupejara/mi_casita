@@ -5,3 +5,21 @@
 .toast-success {
   @apply bg-lime-950 text-white border border-lime-500 rounded-md shadow-md;
 }
+
+:root {
+  --them-color1-light: #F4E3B2;
+  --them-color1-dark:  #D9B88F;
+  --them-color2-light: #E6B89C;
+  --them-color2-dark:  #C97D60;
+  --them-color3-light: #BFD8B8;
+  --them-color3-dark:  #8FB996;
+  --them-color4-light: #A8C6C1;
+  --them-color4-dark:  #6E8B88;
+  --them-color5-light: #DAB6C4;
+  --them-color5-dark:  #AC7D88;
+
+  --Atkinson-font: "Atkinson Hyperlegible Mono", sans-serif;
+  --Indie-Flower-font: "Indie Flower", cursive;
+  --Allura-font: "Allura", cursive;
+
+}
