@@ -19,10 +19,15 @@ const updateNoteColor = (id: number, newColor: string) => {
   );
 };
 
-
+const updateNoteFont = (id: number, newFont: string) => {
+  console.log("Updating note", id, "to font", newFont);
+  setNotes(prev =>
+    prev.map(note => (note.id === id ? { ...note, font: newFont } : note))
+  );
+};
 
   const addNote = () => {
-    setNotes(prev => [...prev, { id: Date.now(), text: "", x: 50, y: 50, color: "var(--them-color2-dark)",}]);
+    setNotes(prev => [...prev, { id: Date.now(), text: "", x: 50, y: 50, color: "var(--them-color2-dark)", font: "font-atkinson",}]);
   };
 
   const deleteNote = (id: number) => {
@@ -54,17 +59,19 @@ const updateNoteColor = (id: number, newColor: string) => {
       nodeRef={noteRefs[note.id]}
       defaultPosition={{ x: note.x, y: note.y }}
       onStop={(e, data) => handleDragStop(note.id, data.x, data.y)}
-      cancel="textarea, .no-drag, .color-swatch"
+      cancel="textarea, .no-drag, .color-swatch, .font"
     >
       <div ref={noteRefs[note.id]} className="absolute">
 <StickyNotes
   key={note.id}
   id={note.id}
   text={note.text}
-  color={note.color} // pass current color
+  color={note.color}
+  font={note.font} 
   onDelete={deleteNote}
   onTextChange={updateNoteText}
-  onColorChange={updateNoteColor} // ✅ important
+  onColorChange={updateNoteColor}
+  onFontChange={updateNoteFont} 
 />
       </div>
     </Draggable>

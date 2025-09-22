@@ -18,8 +18,14 @@
   --them-color5-light: #DAB6C4;
   --them-color5-dark:  #AC7D88;
 
-  --Atkinson-font: "Atkinson Hyperlegible Mono", sans-serif;
-  --Indie-Flower-font: "Indie Flower", cursive;
-  --Allura-font: "Allura", cursive;
+  --font-atkinson: 'Atkinson Hyperlegible', sans-serif;
+  --font-parisienne: 'Parisienne', cursive;
+}
 
+.font-atkinson {
+  font-family: var(--font-atkinson);
+}
+
+.font-parisienne {
+  font-family: var(--font-parisienne);
 }
