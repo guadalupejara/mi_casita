@@ -43,6 +43,7 @@ export interface UserProfile {
   lastName: string;
   email: string;
   phoneNumber?: string;
+  uid: string;
 }
 
 
@@ -57,6 +58,8 @@ export type Note = {
   y: number;
   color: string;
   font: string;
+  firebaseId: string;
+  userId: string;
 };
 
 export default interface StickyNoteProps {

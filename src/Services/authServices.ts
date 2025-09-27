@@ -5,6 +5,7 @@ import { auth, db } from '../lib/firebase';
 import { signInWithEmailAndPassword, deleteUser  } from 'firebase/auth';
 import {LoginUserData, UserProfile, RegisterUserData, SettingsFormValues } from '../Types/types'
 
+
 export const registerUser = async (data: RegisterUserData) => {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
@@ -15,6 +16,7 @@ export const registerUser = async (data: RegisterUserData) => {
   const user = userCredential.user;
 
   await setDoc(doc(db, 'users', user.uid), {
+    uid: user.uid,
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
@@ -38,9 +40,9 @@ export const getCurrentUserProfile = async (): Promise<UserProfile | null> => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const { firstName, lastName, email, phoneNumber } = docSnap.data();
+      const { firstName, lastName, email, phoneNumber, uid } = docSnap.data();
       console.log( firstName , 'name')
-      return { firstName, lastName, email, phoneNumber };
+      return { firstName, lastName, email, phoneNumber, uid };
     } else {
       return null;
     }
