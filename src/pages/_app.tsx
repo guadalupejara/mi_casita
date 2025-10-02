@@ -8,6 +8,10 @@ import { auth } from '../lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getCurrentUserProfile } from '../Services/authServices';
 import { UserProfile } from '../Types/types';
+import { Atkinson_Hyperlegible, Parisienne } from 'next/font/google';
+
+const atkinson = Atkinson_Hyperlegible({ subsets: ['latin'], weight: '400', variable: '--font-atkinson' });
+const parisienne = Parisienne({ subsets: ['latin'], weight: '400', variable: '--font-parisienne' });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -36,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+    <main className={`${atkinson.variable} ${parisienne.variable} font-sans`}>
       {isPublicRoute && <Navbar />}
       <Component
         {...pageProps}
@@ -43,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         reloadUserProfile={reloadUserProfile}
       />
       <Toaster position="top-center" />
+      </main>
     </>
   );
 }

@@ -43,11 +43,12 @@ export interface UserProfile {
   lastName: string;
   email: string;
   phoneNumber?: string;
+  uid: string;
 }
 
 
 export interface SideNavProps {
-  setView: React.Dispatch<React.SetStateAction<'home' | 'settings'>>;
+  setView: React.Dispatch<React.SetStateAction<'home' | 'settings' | 'stickyNotesBoard'>>;
 }
 
 export type Note = {
@@ -55,11 +56,19 @@ export type Note = {
   text: string;
   x: number;
   y: number;
+  color: string;
+  font: string;
+  firebaseId: string;
+  userId: string;
 };
 
 export default interface StickyNoteProps {
   id: number;
   text: string;
-  onTextChange: (id: number, newText: string) => void;
+  color: string;
+  font: string;
   onDelete: (id: number) => void;
+  onTextChange: (id: number, newText: string) => void;
+  onColorChange: (id: number, newColor: string) => void;
+  onFontChange: (id: number, newFont: string) => void;
 }

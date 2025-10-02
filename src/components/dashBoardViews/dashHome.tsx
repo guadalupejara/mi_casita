@@ -9,7 +9,7 @@ const DashboardHome = ({ userProfile }: { userProfile: UserProfile }) => {
   }, [userProfile]);
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4"> Hello {userProfile?.firstName ?? 'Friend'}!</h1>
+      <h1 className="text-2xl font-bold mb-4 text-white"> Hello {userProfile?.firstName ?? 'Friend'}!</h1>
       <p className="text-gray-300">Welcome to your dashboard.</p>
     </>
   );

@@ -6,6 +6,7 @@ import { UserProfile } from '../Types/types';
 import DashHome from '../components/dashBoardViews/dashHome'
 import Settings from '../components/dashBoardViews/settings'
 import DarkTransparentCard from '../components/common/darkTransparentCard';
+import StickyNotesBoard from './stickyNotesBoard';
 
 interface DashboardPageProps {
   userProfile: UserProfile;
@@ -15,7 +16,7 @@ interface DashboardPageProps {
 const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile }) => {
   // In the future this URL will come from Firebase
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
-  const [view, setView] = useState<'home' | 'settings'>('home');
+  const [view, setView] = useState<'home' | 'settings' | 'stickyNotesBoard'>('home');
 
   useEffect(() => {
     const fetchBackgroundImage = async () => {
@@ -31,6 +32,8 @@ const renderView = () => {
     switch (view) {
       case 'home':
         return <DashHome userProfile={userProfile} />;
+      case 'stickyNotesBoard':
+        return <StickyNotesBoard userProfile={userProfile}/>;
       case 'settings':
         return <Settings userProfile={userProfile} reloadUserProfile={reloadUserProfile}/>;
       default:
