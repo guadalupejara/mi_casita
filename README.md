@@ -22,6 +22,6 @@ This app was created as inspired from DAKboard for a customizable display used o
 
 - Designed a dynamic settings form that pre-populates user information from the database, supports updates, and includes a modal for secure account deactivation.
 
-- Created draggable sticky notes that has customizable fonts, and colors. Sticky Note properties stored for future access.
+- Created draggable sticky notes that has customizable fonts, and colors. Sticky Note properties stored for future access and can be added, deleted, and updated in realtime.
 
 
