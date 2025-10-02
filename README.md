@@ -7,9 +7,10 @@ This app was created as inspired from DAKboard for a customizable display used o
 ![Mi Casita Landing Page Features Section](readMe_Images/casita2.png)
 ![Mi Casita LogIn Page](readMe_Images/casita3.png)
 ![Mi Casita Registration Page](readMe_Images/casita4.png)
-![Mi Casita Dashboard Page](readMe_Images/casita5.png)
+![Mi Casita Dashboard Page](readMe_Images/dash.png)
 ![Mi Casita Settings Page](readMe_Images/casita6.png)
 ![Mi Casita Settings Page Modal](readMe_Images/casita7.png)
+![Mi Casita Settings Page Modal](readMe_Images/stickynotes.png)
 
 - Developed and tested responsive webpages using Tailwind CSS and React for the frontend, with Next.js and Firebase for backend management.
 
@@ -20,5 +21,7 @@ This app was created as inspired from DAKboard for a customizable display used o
 - Built secure HTTP routes based on user roles and page requirements, ensuring seamless navigation between public and authenticated user pages.
 
 - Designed a dynamic settings form that pre-populates user information from the database, supports updates, and includes a modal for secure account deactivation.
+
+- Created draggable sticky notes that has customizable fonts, and colors. Sticky Note properties stored for future access.
 
 
