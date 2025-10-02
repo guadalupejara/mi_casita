@@ -195,6 +195,7 @@ const updateNotePosition = (id: number, x: number, y: number) => {
       className="bg-cover bg-center px-4 py-8 sm:py-10 md:py-12 lg:py-16 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh]"
       style={{ backgroundImage: `url(/smileyFace.jpg)` }}
     >
+      <h1 className="text-3xl font-bold mb-4 text-black"> Sticky Notes Board</h1>
       <button onClick={addNote} className="bg-black text-white">
         Add Note
       </button>

@@ -48,7 +48,7 @@ export interface UserProfile {
 
 
 export interface SideNavProps {
-  setView: React.Dispatch<React.SetStateAction<'home' | 'settings'>>;
+  setView: React.Dispatch<React.SetStateAction<'home' | 'settings' | 'stickyNotesBoard'>>;
 }
 
 export type Note = {

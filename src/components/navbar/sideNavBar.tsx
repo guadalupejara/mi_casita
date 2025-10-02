@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Home, LogOut, Cog } from 'lucide-react';
+import { Home, LogOut, Cog, StickyNote } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
@@ -36,6 +36,19 @@ const handleLogout = async () => {
         </button>
         <span className="absolute -right-28 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-2 py-1 rounded shadow">
           Home
+        </span>
+      </div>
+
+       {/* Sticky Note Icon */}
+      <div className="group relative">
+        <button
+          onClick={() => setView('stickyNotesBoard')}
+          className="text-white hover:text-zinc-400 transition-colors"
+        >
+          <StickyNote size={24} />
+        </button>
+        <span className="absolute -right-28 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-xs px-2 py-1 rounded shadow">
+          Sticky Notes
         </span>
       </div>
 
