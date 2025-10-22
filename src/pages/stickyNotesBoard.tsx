@@ -8,30 +8,21 @@ import { addNoteToDB, updateNoteInDB, deleteNoteFromDB, getNotesForUser } from "
 
 interface Props {
   userProfile: UserProfile | null;
+  dataNote: Note[];
 }
 
-function StickyNotesBoard({ userProfile }: Props) {
+function StickyNotesBoard({ userProfile, dataNote}: Props) {
   const [notes, setNotes] = useState<Note[]>([]);
-
+console.log("os prop being passed?", dataNote)
   useEffect(() => {
-    console.log("Notes updated:", notes);
+    console.log("Notes in board:", notes);
+    console.log("user:", userProfile)
   }, [notes]);
   
   useEffect(() => {
   if (!userProfile?.uid) return;
-
-  const fetchNotes = async () => {
-    try {
-      const userNotes = await getNotesForUser(userProfile.uid);
-      setNotes(userNotes);
-      console.log("Loaded notes:", userNotes);
-    } catch (err) {
-      console.error("Failed to fetch notes:", err);
-    }
-  };
-
-    fetchNotes();
-  }, [userProfile?.uid]);
+      setNotes(dataNote);
+  }, [dataNote]);
 const updateNoteColor = (id: number, newColor: string) => {
   setNotes(prev =>
     prev.map(note => {
@@ -104,6 +95,7 @@ const addNote = async () => {
     await updateNoteInDB(firebaseId, { firebaseId });
 
     console.log("Note saved for user:", userProfile.uid, "with ID:", firebaseId);
+    console.log("notes added to state", notes)
   } catch (err) {
     console.error("Failed to save note to DB", err);
   }
@@ -159,13 +151,14 @@ const updateNotePosition = (id: number, x: number, y: number) => {
   );
 };
 
-  const noteRefs = notes.reduce((acc, note) => {
-    acc[note.id] = React.createRef<HTMLDivElement>() as React.RefObject<HTMLDivElement>;
-    return acc;
-  }, {} as Record<number, React.RefObject<HTMLDivElement>>);
+  const noteRefs = (notes ?? []).reduce((acc, note) => {
+  acc[note.id] = React.createRef<HTMLDivElement>() as React.RefObject<HTMLDivElement>;
+  return acc;
+}, {} as Record<number, React.RefObject<HTMLDivElement>>);
+
 
   const NoteMapper = () => {
-  return notes.map(note => (
+  return (notes ?? []).map(note => (
     <Draggable
   key={note.id}
   nodeRef={noteRefs[note.id]}

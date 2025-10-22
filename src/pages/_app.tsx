@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { auth } from '../lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getCurrentUserProfile } from '../Services/authServices';
-import { UserProfile } from '../Types/types';
+import { Note, UserProfile } from '../Types/types';
 import { Atkinson_Hyperlegible, Parisienne } from 'next/font/google';
+import { getNotesForUser } from '../Services/stickyNote/noteService';
 
 const atkinson = Atkinson_Hyperlegible({ subsets: ['latin'], weight: '400', variable: '--font-atkinson' });
 const parisienne = Parisienne({ subsets: ['latin'], weight: '400', variable: '--font-parisienne' });
@@ -19,12 +20,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isPublicRoute = publicRoutes.includes(router.pathname.toLowerCase());
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [notes, setNotes] = useState<Note[]>([]);
 
   const reloadUserProfile = async () => {
     const profile = await getCurrentUserProfile();
     setUserProfile(profile);
      console.log("reloading", userProfile)
+    
   };
+
+useEffect(() => {
+  if (!userProfile?.uid) return;
+
+  const fetchNotes = async () => {
+    const userNotes = await getNotesForUser(userProfile.uid);
+    setNotes(userNotes);
+  };
+
+  fetchNotes();
+}, [userProfile]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -38,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => unsubscribe();
   }, [router.pathname]);
 
+console.log("current notes", notes)
   return (
     <>
     <main className={`${atkinson.variable} ${parisienne.variable} font-sans`}>
@@ -45,6 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component
         {...pageProps}
         userProfile={userProfile}
+        dataNote={notes ?? []}
         reloadUserProfile={reloadUserProfile}
       />
       <Toaster position="top-center" />
