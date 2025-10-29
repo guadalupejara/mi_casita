@@ -52,7 +52,6 @@ useEffect(() => {
     return () => unsubscribe();
   }, [router.pathname]);
 
-console.log("current notes", notes)
   return (
     <>
     <main className={`${atkinson.variable} ${parisienne.variable} font-sans`}>
@@ -60,7 +59,8 @@ console.log("current notes", notes)
       <Component
         {...pageProps}
         userProfile={userProfile}
-        dataNote={notes ?? []}
+        notes ={notes ?? []}
+        setNotes={setNotes} 
         reloadUserProfile={reloadUserProfile}
       />
       <Toaster position="top-center" />

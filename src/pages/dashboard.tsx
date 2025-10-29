@@ -10,11 +10,12 @@ import StickyNotesBoard from './stickyNotesBoard';
 
 interface DashboardPageProps {
   userProfile: UserProfile;
-  dataNote: Note[];
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
   reloadUserProfile: () => Promise<void>;
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile, dataNote }) => {
+const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile, notes, setNotes }) => {
   // In the future this URL will come from Firebase
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
   const [view, setView] = useState<'home' | 'settings' | 'stickyNotesBoard'>('home');
@@ -34,7 +35,7 @@ const renderView = () => {
       case 'home':
         return <DashHome userProfile={userProfile} />;
       case 'stickyNotesBoard':
-        return <StickyNotesBoard userProfile={userProfile} dataNote={dataNote}/>;
+        return <StickyNotesBoard userProfile={userProfile} notes={notes} setNotes={setNotes}/>;
       case 'settings':
         return <Settings userProfile={userProfile} reloadUserProfile={reloadUserProfile}/>;
       default:
