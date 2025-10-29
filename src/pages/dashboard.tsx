@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import SideNav from '../components/navbar/sideNavBar'
-import { UserProfile } from '../Types/types';
+import { UserProfile, Note } from '../Types/types';
 import DashHome from '../components/dashBoardViews/dashHome'
 import Settings from '../components/dashBoardViews/settings'
 import DarkTransparentCard from '../components/common/darkTransparentCard';
@@ -10,10 +10,12 @@ import StickyNotesBoard from './stickyNotesBoard';
 
 interface DashboardPageProps {
   userProfile: UserProfile;
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
   reloadUserProfile: () => Promise<void>;
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile }) => {
+const DashboardPage: React.FC<DashboardPageProps> = ({ userProfile, reloadUserProfile, notes, setNotes }) => {
   // In the future this URL will come from Firebase
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
   const [view, setView] = useState<'home' | 'settings' | 'stickyNotesBoard'>('home');
@@ -33,7 +35,7 @@ const renderView = () => {
       case 'home':
         return <DashHome userProfile={userProfile} />;
       case 'stickyNotesBoard':
-        return <StickyNotesBoard userProfile={userProfile}/>;
+        return <StickyNotesBoard userProfile={userProfile} notes={notes} setNotes={setNotes}/>;
       case 'settings':
         return <Settings userProfile={userProfile} reloadUserProfile={reloadUserProfile}/>;
       default:

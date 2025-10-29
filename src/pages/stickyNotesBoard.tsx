@@ -8,30 +8,15 @@ import { addNoteToDB, updateNoteInDB, deleteNoteFromDB, getNotesForUser } from "
 
 interface Props {
   userProfile: UserProfile | null;
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
-function StickyNotesBoard({ userProfile }: Props) {
-  const [notes, setNotes] = useState<Note[]>([]);
-
-  useEffect(() => {
-    console.log("Notes updated:", notes);
-  }, [notes]);
-  
+function StickyNotesBoard({ userProfile, notes, setNotes}: Props) {
   useEffect(() => {
   if (!userProfile?.uid) return;
-
-  const fetchNotes = async () => {
-    try {
-      const userNotes = await getNotesForUser(userProfile.uid);
-      setNotes(userNotes);
-      console.log("Loaded notes:", userNotes);
-    } catch (err) {
-      console.error("Failed to fetch notes:", err);
-    }
-  };
-
-    fetchNotes();
-  }, [userProfile?.uid]);
+      setNotes(notes);
+  }, [notes]);
 const updateNoteColor = (id: number, newColor: string) => {
   setNotes(prev =>
     prev.map(note => {
@@ -93,17 +78,15 @@ const addNote = async () => {
   try {
     const firebaseId = await addNoteToDB(newNote, userProfile.uid);
 
-    // Update local state with firebaseId
     setNotes(prev =>
       prev.map(note =>
         note.id === localId ? { ...note, firebaseId } : note
       )
     );
 
-    // Also patch Firestore so the document knows its own firebaseId
-    await updateNoteInDB(firebaseId, { firebaseId });
-
+    await updateNoteInDB(firebaseId, { firebaseId })
     console.log("Note saved for user:", userProfile.uid, "with ID:", firebaseId);
+  
   } catch (err) {
     console.error("Failed to save note to DB", err);
   }
@@ -112,7 +95,6 @@ const addNote = async () => {
 const deleteNote = (id: number) => {
   setNotes(prev => {
     const noteToDelete = prev.find(note => note.id === id);
-
     if (noteToDelete?.firebaseId) {
       deleteNoteFromDB(noteToDelete.firebaseId)
         .catch(err => console.error("Failed to delete note from DB:", err));
@@ -159,13 +141,14 @@ const updateNotePosition = (id: number, x: number, y: number) => {
   );
 };
 
-  const noteRefs = notes.reduce((acc, note) => {
-    acc[note.id] = React.createRef<HTMLDivElement>() as React.RefObject<HTMLDivElement>;
-    return acc;
-  }, {} as Record<number, React.RefObject<HTMLDivElement>>);
+  const noteRefs = (notes ?? []).reduce((acc, note) => {
+  acc[note.id] = React.createRef<HTMLDivElement>() as React.RefObject<HTMLDivElement>;
+  return acc;
+}, {} as Record<number, React.RefObject<HTMLDivElement>>);
+
 
   const NoteMapper = () => {
-  return notes.map(note => (
+  return (notes ?? []).map(note => (
     <Draggable
   key={note.id}
   nodeRef={noteRefs[note.id]}
