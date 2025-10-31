@@ -1,10 +1,10 @@
 
 "use client";
 import StickyNotes from "../components/stickyNotes/stickyNotes";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Note, UserProfile } from "../Types/types";
 import Draggable from "react-draggable";
-import { addNoteToDB, updateNoteInDB, deleteNoteFromDB, getNotesForUser } from "../Services/stickyNote/noteService";
+import { addNoteToDB, updateNoteInDB, deleteNoteFromDB } from "../Services/stickyNote/noteService";
 
 interface Props {
   userProfile: UserProfile | null;

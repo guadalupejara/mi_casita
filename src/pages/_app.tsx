@@ -10,6 +10,7 @@ import { getCurrentUserProfile } from '../Services/authServices';
 import { Note, UserProfile } from '../Types/types';
 import { Atkinson_Hyperlegible, Parisienne } from 'next/font/google';
 import { getNotesForUser } from '../Services/stickyNote/noteService';
+import StickyNotesWidget from '../components/stickyNotesWidget/stickyNotesWidget';
 
 const atkinson = Atkinson_Hyperlegible({ subsets: ['latin'], weight: '400', variable: '--font-atkinson' });
 const parisienne = Parisienne({ subsets: ['latin'], weight: '400', variable: '--font-parisienne' });
