@@ -65,7 +65,6 @@ useEffect(() => {
         reloadUserProfile={reloadUserProfile}
       />
       <Toaster position="top-center" />
-      <StickyNotesWidget notes ={notes ?? []}/>
       </main>
     </>
   );
