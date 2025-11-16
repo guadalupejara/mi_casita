@@ -7,6 +7,7 @@ import DashHome from '../components/dashBoardViews/dashHome'
 import Settings from '../components/dashBoardViews/settings'
 import DarkTransparentCard from '../components/common/darkTransparentCard';
 import StickyNotesBoard from './stickyNotesBoard';
+import TopNavBar from '../components/navbar/topNavBar';
 
 interface DashboardPageProps {
   userProfile: UserProfile;
@@ -51,6 +52,7 @@ const renderView = () => {
         backgroundColor: backgroundImageUrl ? undefined : '#111827',
       }}
     >
+      <TopNavBar />
       <div className='w-[90%] max-w-6xl h-[80%]'>
       <DarkTransparentCard>{renderView()}</DarkTransparentCard>
       </div>
