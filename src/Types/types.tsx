@@ -72,3 +72,9 @@ export default interface StickyNoteProps {
   onColorChange: (id: number, newColor: string) => void;
   onFontChange: (id: number, newFont: string) => void;
 }
+
+export interface notesBoardProps {
+  userProfile: UserProfile | null;
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+}
