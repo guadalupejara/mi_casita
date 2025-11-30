@@ -1,11 +1,14 @@
 'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import {Plus} from 'lucide-react';
 
 function topNavBar (){
+const router = useRouter();
 
  const handleAdd = () =>{
     console.log("Adding new room..")
+ router.push('/windows');
  }   
 return(
     <>
