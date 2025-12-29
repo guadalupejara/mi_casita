@@ -1,11 +1,16 @@
-"use client"
-import React from "react"
+"use client";
+import dynamic from "next/dynamic";
 
-function windows (){
-    return(
-        <>
-        <h1>windows!</h1>
-        </>
-    )
+const DrawerShell = dynamic(
+  () => import("../components/drawer/drawerShell"),
+  { ssr: false }
+);
+
+export default function Windows() {
+  return (
+    <>
+      <h1>windows!</h1>
+      <DrawerShell />
+    </>
+  );
 }
-export default windows
