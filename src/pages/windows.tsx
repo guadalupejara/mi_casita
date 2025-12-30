@@ -9,7 +9,6 @@ const DrawerShell = dynamic(
 export default function Windows() {
   return (
     <>
-      <h1>windows!</h1>
       <DrawerShell />
     </>
   );
